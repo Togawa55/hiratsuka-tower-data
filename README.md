@@ -13,7 +13,7 @@
 
 `data/hiratsuka_tower.csv`
 
-GitHub Actionsは毎日23時45分ごろに起動します。GitHub側の混雑により、開始が遅れることがあります。
+GitHub Actionsは日本時間の毎日23時45分ごろに起動します。GitHub側の混雑により、開始が遅れることがあります。
 
 ## 手動実行
 
