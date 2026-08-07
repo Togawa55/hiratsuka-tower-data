@@ -2,8 +2,8 @@ name: Collect Hiratsuka Tower data
 
 on:
   schedule:
-    # GitHub Actions uses UTC. 14:45 UTC = 23:45 JST.
-    - cron: "45 14 * * *"
+    # GitHub Actions uses UTC. 15:15 UTC = 00:15 JST.
+    - cron: "15 15 * * *"
   workflow_dispatch:
 
 permissions:
