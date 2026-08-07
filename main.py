@@ -170,18 +170,19 @@ def click_date_arrow(page: Page, direction: str) -> None:
     target_button.click()
 
     # Wait until the displayed date actually changes.
-    page.wait_for_function(
-        """([pattern, beforeText]) => {
-            const re = new RegExp(pattern);
-            return Array.from(document.querySelectorAll('body *')).some(el => {
-                const text = (el.textContent || '').trim();
-                return re.test(text) && text !== beforeText;
-            });
-        }""",
-        arg=[r"\\d{4}年\\d{1,2}月\\d{1,2}日", f"{before.year}年{before.month}月{before.day}日"],
-        timeout=30_000,
+    # Poll the page directly instead of relying on JavaScript regex escaping.
+    for _ in range(15):
+        page.wait_for_timeout(2_000)
+        try:
+            after = read_displayed_date(page)
+        except RuntimeError:
+            continue
+        if after != before:
+            return
+
+    raise RuntimeError(
+        f"日付移動ボタンを押しましたが、表示日付が {before.isoformat()} から変わりませんでした。"
     )
-    page.wait_for_timeout(2_000)
 
 
 def navigate_to_date(page: Page, target: date) -> None:
