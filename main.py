@@ -178,7 +178,7 @@ def click_date_arrow(page: Page, direction: str) -> None:
                 return re.test(text) && text !== beforeText;
             });
         }""",
-        [r"\\d{4}年\\d{1,2}月\\d{1,2}日", f"{before.year}年{before.month}月{before.day}日"],
+        arg=[r"\\d{4}年\\d{1,2}月\\d{1,2}日", f"{before.year}年{before.month}月{before.day}日"],
         timeout=30_000,
     )
     page.wait_for_timeout(2_000)
